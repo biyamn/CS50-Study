@@ -15,4 +15,4 @@
 
 [5. Memory.md](#5.-Memory.md)
 
-[6. Data Structures.md](#6.-Data-Structures)
+[6. Data Structures.md](#6.-Data-Structures.md)

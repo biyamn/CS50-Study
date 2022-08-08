@@ -3,9 +3,9 @@
 
 <hr>
 # 목차
-[1. Computational Thinking, Scratch](#1.-Computational-Thinking,-Scratch.md)
-[2. C.md](#2.-C.md)
-[3. Array.md](#3.-Array.md)
-[4. Algorithms.md](#4.-Algorithms.md)
-[5. Memory.md](#5.-Memory.md)
-[6. Data Structures.md](#6.-Data-Structures)
+[1. Computational Thinking, Scratch](#1_Computational_Thinking,Scratch.md)
+[2. C.md](#2_C.md)
+[3. Array.md](#3_Array.md)
+[4. Algorithms.md](#4_Algorithms.md)
+[5. Memory.md](#5_Memory.md)
+[6. Data Structures.md](#6_Data_Structures)

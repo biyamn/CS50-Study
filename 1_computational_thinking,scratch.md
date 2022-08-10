@@ -137,10 +137,22 @@ while left<=right:
     left = mid+1
 ```
 
-
 <br>
 
 # 4) 스크래치: 기초
+## 스크래치란?
+퍼즐 조각처럼 보이는 블럭들을 끌어 놓는 방식으로 연결시켜 컴퓨터가 무엇을 할지 단계적으로 프로그래밍할 수 있는 언어
 
+## 스크래치 예시
+깃발이 클릭되면 -> 'What's your name?'이라고 묻고 -> 이름을 입력받은 후 -> 'Hello, 이름'을 말한다 
+![0](https://user-images.githubusercontent.com/101965666/184025902-ee9d0cf0-0d84-4f19-aff9-ad3440ee4468.PNG)
+
+<br>
+
+이를 input -> algorithms -> output에 대입하면 'Hello, '와 answer(이름)을 input으로 받아 join이라는 알고리즘으로 합쳐주고, 이를 다시 말하라는 알고리즘의 입력으로 집어넣어 최종적으로 'Hello, 이름'이라고 말하는 고양이가 완성된다. 
+![1](https://user-images.githubusercontent.com/101965666/184025906-be845e1e-e111-48fa-b423-49a6b1c749a8.PNG)
+![2](https://user-images.githubusercontent.com/101965666/184025911-aa45763d-bfc1-4c81-8e5a-8ae8fd156347.PNG)
+
+<br>
 
 # 5) 스크래치: 심화

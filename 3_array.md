@@ -335,3 +335,9 @@ printf("%c%c%c%c\n", names[0][0], names[0][1], names[0][2], names[0][3]);
 names라는 배열에 차례대로 "EMMA", "RODRIGO", "BRIAN", "DAVID"를 넣으면 실제 메모리에는 아래와 같이 저장된다.
 
 ![캡처](https://user-images.githubusercontent.com/101965666/187699482-bfe6303c-de96-43aa-ae6b-9a31c312f10b.PNG)
+
+<br>
+
+### 💡생각해보기
+Q. 널 종단 문자는 왜 필요할까요?
+A. 문자열의 끝을 알려주기 위해

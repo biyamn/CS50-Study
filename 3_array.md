@@ -482,3 +482,56 @@ Q. string.h와 ctype.h의 라이브러리에 다른 어떤 함수가 있는지 �
 A. 
 string.h - 문자열 복사 함수(memcpy, strcpy, strncpy 등), 문자열을 합치는 함수(strcat, strncat 등), 문자열 비교 함수(memcmp, strcmp, strcoll, strncmp 등) 등
 ctype.h - isalnum(알파벳 또는 숫자인지 판별), isalpha(알파벳인지 판별), iscntrl(제어 문자인지 판별), isdigit(10진수에 해당하는 숫자인지 판별), islower(소문자인지 판별), isupper(대문자인지 판별), isprint(출력이 가능한가 판별), isspace(빈칸인지 판별),  isxdigit(16진수인지 판별) 등
+
+<br>
+
+# 8) 명령행 인자
+명령행 인자의 예시)
+`-o`와 같은 명령행 인자를 추가하면 원하는 파일명으로 변경하여 컴파일할 수 있다. 
+
+명령행 인자는 실행하고자 하는 프로그램 뒤에 적는다.
+
+<hr>
+
+이제까지는 `int main(void){}`라는 것을 썼었는데, main함수의 인자로 꼭 `void`만 들어가야 하는 것은 아니다. 
+
+`int main(int argc, string argv[])`와 같이 작성할 수도 있는데, 이는 main 함수가 두 개의 인자를 받는데 <b>하나는 int이고 다른 하나는 string의 배열</b>이라는 뜻이다. 
+
+<b>argc</b>: arguments count로 main함수에 전달된 인자의 개수
+<b>argv</b>: arguments vector로 가변적인 개수의 문자열
+
+<br>
+
+아래의 파일을 컴파일하고 `./argv David`로 실행하면 `hello, David`가 출력되는데 그 이유는 다음과 같다.
+
+- argc는 main함수에 전달된 인자의 개수를 의미하며 여기서 argc는 2임. 왜냐하면 ./argv(1개), David(2개)이기 때문.
+
+- argc가 2일 때 `hello, argv[1]`을 출력하는데, argv[1]은 `David`이다. 
+왜 argv[0]이 아니라 argv[1]이냐면 argv[0]을 출력했을 때 `./argv`가 나오는데, 명령행 인자에서 `./argv`까지 카운트하기 때문.
+
+```c
+// argv.c
+#include <stdio.h>
+#include <cs50.h>
+
+int main(int argc, string argv[])
+{
+    if (argc==2)
+    {
+        printf("hello, %s\n", argv[1]);
+    }
+    else
+    {
+        printf("hello, world\n");
+    }
+}
+```
+
+<br>
+
+### 💡생각해보기
+Q. 명령행 인자는 프로그램의 확장성에 어떤 도움이 될까요? 구체적인 예시를 떠올려보세요.
+
+A. 
+- 효율성: 사용자에게 입력을 받는 구문이 사라져 코드가 간결해짐
+- 확장성: 명령행 인자에 따라 하나의 프로그램에서 여러가지 기능 수행 가능

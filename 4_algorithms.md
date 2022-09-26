@@ -30,7 +30,7 @@ Return false
 If no items
 
     Return false
-
+ 
 If middle item is 50
 
     Return true

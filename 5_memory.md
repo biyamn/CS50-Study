@@ -143,3 +143,144 @@ int main(void)
 ### 💡생각해보기
 Q. string 자료형을 정의해서 사용하면 어떤 장점이 있을까요?
 A. 직관적으로 코드를 볼 수 있고, 간결해진다. 
+
+<br>
+
+# 4) 문자열 비교
+문자열이 저장되어 있는 방식에 근거해서 문자열을 비교하는 방법을 알아보자.
+
+## (1) 숫자 비교해보기
+정수 i와 j를 입력하고 둘이 비교하여 같으면 Same, 다르면 Different를 출력한다. 시험 결과, 정상적으로 동작한다!
+
+```c
+#include <cs50.h>
+#include <stdio.h>
+
+int main(void)
+{
+    int i = get_int("i: ");
+    int j = get_int("j: ");
+
+    if (i == j)
+    {
+        printf("Same\n");
+    }
+    else
+    {
+        printf("Different\n");
+    }
+}
+```
+
+## (2) 문자열 비교해보기
+### (2-1). CS50라이브러리를 사용해서 문자열 비교
+하지만 여기서는 동일한 문자를 비교해도 Same이 아니라 Diffetrent가 출력된다.
+
+왜일까? 
+```c
+#include <cs50.h>
+#include <stdio.h>
+
+int main(void)
+{
+    string s = get_string("s: "); // char *s
+    string t = get_string("t: "); // char *t
+
+    if (s == t)
+    {
+        printf("Same\n"); // 절대 출력되지 않음
+    }
+    else
+    {
+        printf("Different\n");
+    }
+}
+```
+왜냐하면 s와 t는 입력받은 '변수'가 아니기 때문이다. 둘은 입력받은 문자열의 첫번째 글자가 위치한 '주소'이다.
+
+s는 get_string()에서 받은 문자열이 있는 주소이다. t 또한 두번째 get_string()에서 받은 문자열이 있는 주소이다. 
+
+따라서 이 둘은 다를 수밖에 없다. 
+
+![캡처](https://user-images.githubusercontent.com/101965666/193988746-d01542b8-0072-41eb-9370-bdfe1a1253e0.PNG)
+
+<br>
+
+결국 위에서 비교한 것은 두 변수의 주소이다. 
+
+하지만 실제 주소는 문자열을 비교할 때 의미가 없다. 그렇다면 문자열을 비교하려면 어떻게 해야 할까? 이건 아래의 `💡생각해보기`에서 알아보자. 
+
+### (2-2). CS50라이브러리를 사용하지 않고 문자열 비교
+
+문자열을 비교할 때, 만약 CS50 라이브러리를 사용하지 않는다면 string을 사용할 수 없으므로 아래와 같이 char을 사용해서 비교해야 한다. 하지만 여기서도 역시 s와 t는 문자열의 첫번째 문자가 위치한 주소이다. 
+
+```c
+#include <cs50.h>
+#include <stdio.h>
+
+int main(void)
+{
+    char *s = get_string("s: ");
+    char *t = get_string("t: ");
+
+    printf("%p\n", s); // 0xba06b0
+    printf("%p\n", t); // 0xba06f0
+}
+```
+<br>
+
+### 💡생각해보기
+Q. 문자열을 비교하는 코드는 어떻게 작성해야 할까요?
+A. 문자열을 출력하는 코드는 완성했지만, 비교하는 법은 모르겠다...
+
+```c
+#include <stdio.h>
+#include <string.h>
+
+int main(void)
+{
+    char *s = get_string("s: "); // EMMA
+    char *t = get_string("t: "); // EMMA
+
+    for(int i=0; i<strlen(s); i++)
+    {
+        printf("%c", s[i]); // EMMA
+    }
+
+    printf("\n");
+
+    for(int i=0; i<strlen(t); i++)
+    {
+        printf("%c", t[i]); // EMMA
+    }
+
+    printf("\n");
+}
+```
+
+다른 사람들이 작성한 풀이를 봤는데, strcmp라는 문자열 비교 함수를 사용하고 있었다! 그래서 나도 만들어봤다. 정상적으로 동작한다!
+
+```c
+#include <cs50.h>
+#include <stdio.h>
+#include <string.h>
+
+int main(void)
+{
+    char *s = get_string("s: "); // EMMA
+    char *t = get_string("t: "); // EMMA
+
+    if (strcmp(s,t) == 0)
+    {
+        printf("Same\n"); // Same
+    }
+    else
+    {
+        printf("Different\n");
+    }
+}
+```
+
+<br>
+
+# 5) 

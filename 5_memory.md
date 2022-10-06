@@ -283,4 +283,137 @@ int main(void)
 
 <br>
 
-# 5) 
+# 5) 문자열 복사
+## (1) 문자열 복사 코드 - 1
+아래와 같이 `t=s`라는 코드를 작성하면 t를 바꿨는데도 s까지 바뀌는 것을 볼 수 있다. 
+
+string은 char *와 같기 때문에 결국 s와 t는 주소를 복사하고 있는 것이 된다. 
+
+따라서 t라는 변수를 만들어 s를 대입하면 **s 안에 있는 화살표(emma를 가리키고 있음)를 복사해서 t에 저장**하는 것이다. 
+
+```c
+#include <cs50.h>
+#include <stdio.h>
+#include <ctype.h>
+
+int main(void)
+{
+    string s = get_string("s: "); // emma
+
+    string t = s;
+
+    t[0] = toupper(t[0]);
+
+    printf("%s\n", s); // Emma
+    printf("%s\n", t); // Emma
+}
+```
+
+## (2) 문자열 복사 코드 - 2
+아래와 같이 malloc을 통해 문자열을 복사하는데 필요한 메모리 공간을 할당하고 loop를 통해 복사를 진행하면 s와 t가 같더라도 t를 변경했을 때 s가 바뀌지는 않는다.
+
+```c
+#include <cs50.h>
+#include <stdio.h>
+#include <ctype.h>
+#include <string.h>
+#include <stdlib.h>
+
+int main(void)
+{
+    char *s = get_string("s: "); // emma
+
+    // EMMA를 복사하는데 필요한 메모리 공간 할당
+    char *t = malloc(strlen(s)+1);
+
+    // loop를 통해 실제로 복사
+    for (int i=0, n=strlen(s); i<n+1; i++)
+    {
+        t[i] = s[i];
+    }
+
+    t[0] = toupper(t[0]);
+
+    printf("%s\n", s); // emma
+    printf("%s\n", t); // Emma
+}
+```
+
+strcpy라는 문자열 복사 함수를 사용하여 위 코드를 수정한다면 for문을 아래처럼 변경하면 된다.
+
+```c
+strcpy(t, s);
+```
+
+<br>
+
+### 💡생각해보기
+Q. 배운 바와 같이 메모리 할당을 통해 문자열을 복사하지 않고, 단순히 문자열의 주소만 복사했을 때는 어떤 문제가 생길까요?
+
+A. 복사한 값이 바뀌면 복사된 값 또한 바뀌는 문제가 생긴다. 두개의 변수가 같은 주소를 가리키기 때문에!
+
+<br>
+
+# 6) 메모리 할당과 해제
+## 메모리 해제
+사용하지 않는 메모리는 해제하는 것이 좋다. 그렇지 않은 경우 메모리에 저장한 값은 쓰레기 값으로 남게 되어 메모리 용량의 낭비가 발생하게 되기 때문이다.(메모리 누수)
+
+메모리를 할당할 때는 아래에 free(malloc이 할당해 준 메모리의 주소)를 써주면 된다. 
+
+위의 5) 문자열 복사 파트에서 메모리를 해제한다면 아래와 같이 `free(t)`를 적어주면 된다. 
+
+```c
+#include <cs50.h>
+#include <stdio.h>
+#include <ctype.h>
+#include <string.h>
+#include <stdlib.h>
+
+int main(void)
+{
+    char *s = get_string("s: "); // emma
+
+    // EMMA를 복사하는데 필요한 메모리 공간 할당
+    char *t = malloc(strlen(s)+1);
+
+    // loop를 통해 실제로 복사
+    for (int i=0, n=strlen(s); i<n+1; i++)
+    {
+        t[i] = s[i];
+    }
+
+    t[0] = toupper(t[0]);
+
+    printf("%s\n", s); // emma
+    printf("%s\n", t); // Emma
+
+    // 메모리 해제
+    free(t);
+}
+```
+
+## 버퍼오버플로우
+(버퍼=배열)
+
+버퍼오버플로우는 아래와 같은 상황에서 발생한다. 10개의 int형 사이즈(4바이트)의 10배에 해당하는 크기의 메모리, 즉 40바이트를 할당했다.
+
+이는 x[0]부터 x[9]까지 있다는 소리인데, 실수로 x[10], 즉 정의되지 않은 인덱스에 접근하여 오버플로우가 발생하는 것이다. 
+
+```c
+void f(void)
+{
+    int *x = malloc(10 * sizeof(int));
+    x[10] = 0;
+}
+```
+
+<br>
+
+### 💡생각해보기
+Q. 제한된 메모리를 가지고 프로그래밍을 할 때 메모리를 해제하지 않으면 어떤 문제가 발생할 수 있을까요?
+
+A. 메모리가 부족해지고 메모리 누수(컴퓨터 프로그램이 필요하지 않은 메모리를 계속 점유하고 있는 현상)가 발생하게 된다. 
+
+<br>
+
+# 7) 메모리 교환, 스택, 힙
